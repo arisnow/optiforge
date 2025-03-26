@@ -5,18 +5,18 @@ import githubLogo from 'public/images/github-mark-white.svg';
 
 const navItems = [
     { linkText: 'Home', href: '/' },
-    { linkText: 'Revalidation', href: '/revalidation' },
-    { linkText: 'Image CDN', href: '/image-cdn' },
-    { linkText: 'Edge Function', href: '/edge' },
-    { linkText: 'Blobs', href: '/blobs' },
-    { linkText: 'Classics', href: '/classics' }
+    { linkText: 'Services', href: '/services' },
+    { linkText: 'Technology', href: '/technology' },
+    { linkText: 'Case Studies', href: '/case-studies' },
+    { linkText: 'About Us', href: '/about' },
+    { linkText: 'Contact', href: '/contact' }
 ];
 
 export function Header() {
     return (
         <nav className="flex flex-wrap items-center gap-4 pt-6 pb-12 sm:pt-12 md:pb-24">
             <Link href="/">
-                <Image src={netlifyLogo} alt="Netlify logo" />
+                <div className="font-bold text-xl text-primary">MCP Solutions</div>
             </Link>
             {!!navItems?.length && (
                 <ul className="flex flex-wrap gap-x-4 gap-y-1">
@@ -30,7 +30,7 @@ export function Header() {
                 </ul>
             )}
             <Link
-                href="https://github.com/netlify-templates/next-platform-starter"
+                href="https://github.com/your-organization/mcp-server-solutions"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hidden lg:inline-flex lg:ml-auto"
