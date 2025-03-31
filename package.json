@@ -1,0 +1,11 @@
+{
+  "name": "optiforge-website",
+  "version": "1.0.0",
+  "description": "OptiForge Business Automation Website",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'No build step needed'"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
