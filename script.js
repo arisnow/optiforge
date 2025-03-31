@@ -1,24 +1,5 @@
 // Wait for the DOM to be fully loaded
 document.addEventListener("DOMContentLoaded", function () {
-  // Tab functionality
-  const tabButtons = document.querySelectorAll(".tab-btn");
-  const tabPanes = document.querySelectorAll(".tab-pane");
-
-  tabButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      // Remove active class from all buttons and panes
-      tabButtons.forEach((btn) => btn.classList.remove("active"));
-      tabPanes.forEach((pane) => pane.classList.remove("active"));
-
-      // Add active class to clicked button
-      button.classList.add("active");
-
-      // Get the target tab id and activate the corresponding pane
-      const tabId = button.getAttribute("data-tab");
-      document.getElementById(tabId).classList.add("active");
-    });
-  });
-
   // Smooth scrolling for internal links
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
@@ -180,19 +161,62 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Scroll reveal animations
-  const revealElements = document.querySelectorAll(
-    ".solution-card, .case-card"
-  );
+  // Animation for approach steps
+  const steps = document.querySelectorAll(".approach-step");
 
-  const revealOnScroll = () => {
-    const windowHeight = window.innerHeight;
+  if (steps.length > 0) {
+    // Add animation CSS
+    const stepAnimation = document.createElement("style");
+    stepAnimation.textContent = `
+            .approach-step {
+                opacity: 0;
+                transform: translateX(-20px);
+                transition: opacity 0.6s ease, transform 0.6s ease;
+            }
+            
+            .approach-step.animated {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            
+            .approach-step:nth-child(1) { transition-delay: 0.1s; }
+            .approach-step:nth-child(2) { transition-delay: 0.3s; }
+            .approach-step:nth-child(3) { transition-delay: 0.5s; }
+            .approach-step:nth-child(4) { transition-delay: 0.7s; }
+        `;
+    document.head.appendChild(stepAnimation);
 
-    revealElements.forEach((element) => {
-      const elementTop = element.getBoundingClientRect().top;
+    // Animate steps on scroll
+    const animateSteps = () => {
+      const triggerPosition = window.innerHeight * 0.8;
 
-      if (elementTop < windowHeight - 100) {
-        element.classList.add("revealed");
+      const approachSection = document.querySelector(".approach");
+      const approachRect = approachSection.getBoundingClientRect();
+
+      if (approachRect.top < triggerPosition) {
+        steps.forEach((step) => {
+          step.classList.add("animated");
+        });
+        // Remove scroll listener once animated
+        window.removeEventListener("scroll", animateSteps);
+      }
+    };
+
+    // Initial check and add scroll event listener
+    animateSteps();
+    window.addEventListener("scroll", animateSteps);
+  }
+
+  // Animation for solution and case study cards
+  const animateCards = () => {
+    const cards = document.querySelectorAll(".solution-card, .case-card");
+    const triggerPosition = window.innerHeight * 0.8;
+
+    cards.forEach((card) => {
+      const cardRect = card.getBoundingClientRect();
+
+      if (cardRect.top < triggerPosition) {
+        card.classList.add("revealed");
       }
     });
   };
@@ -214,6 +238,6 @@ document.addEventListener("DOMContentLoaded", function () {
   document.head.appendChild(revealStyle);
 
   // Initial check and add scroll event listener
-  revealOnScroll();
-  window.addEventListener("scroll", revealOnScroll);
+  animateCards();
+  window.addEventListener("scroll", animateCards);
 });
