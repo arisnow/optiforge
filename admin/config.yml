@@ -1,0 +1,115 @@
+# Decap CMS Configuration
+backend:
+  name: git-gateway
+  branch: main # Branch to update
+
+# Media configuration
+media_folder: "images/uploads" # Where media files will be stored
+public_folder: "/images/uploads" # Public path to media files
+
+# Content Collections
+collections:
+  # Main site content
+  - name: "site_content"
+    label: "Site Content"
+    files:
+      - name: "home"
+        label: "Home Page"
+        file: "_data/home.json"
+        fields:
+          - {
+              label: "Hero Title",
+              name: "hero_title",
+              widget: "string",
+              hint: "Main headline on the homepage",
+            }
+          - {
+              label: "Hero Subtitle",
+              name: "hero_subtitle",
+              widget: "string",
+              hint: "Subheadline below the main headline",
+            }
+
+      - name: "services"
+        label: "Our Services Section"
+        file: "_data/services.json"
+        fields:
+          - { label: "Section Title", name: "title", widget: "string" }
+          - {
+              label: "Section Description",
+              name: "description",
+              widget: "text",
+            }
+          - label: "Service Items"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - {
+                  label: "Icon",
+                  name: "icon",
+                  widget: "string",
+                  hint: "Font Awesome icon class, e.g. 'fas fa-chart-line'",
+                }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+
+      - name: "case_studies"
+        label: "Case Studies Section"
+        file: "_data/case_studies.json"
+        fields:
+          - { label: "Section Title", name: "title", widget: "string" }
+          - {
+              label: "Section Description",
+              name: "description",
+              widget: "text",
+            }
+          - label: "Case Study Items"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "string" }
+              - { label: "Image", name: "image", widget: "image" }
+
+      - name: "approach"
+        label: "Our Approach Section"
+        file: "_data/approach.json"
+        fields:
+          - { label: "Section Title", name: "title", widget: "string" }
+          - {
+              label: "Section Description",
+              name: "description",
+              widget: "text",
+            }
+          - label: "Approach Steps"
+            name: "steps"
+            widget: "list"
+            summary: "Step {{fields.number}}: {{fields.title}}"
+            fields:
+              - {
+                  label: "Step Number",
+                  name: "number",
+                  widget: "number",
+                  min: 1,
+                }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+
+  # Site settings
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - name: "contact"
+        label: "Contact Information"
+        file: "_data/contact.json"
+        fields:
+          - { label: "Contact Title", name: "title", widget: "string" }
+          - {
+              label: "Contact Description",
+              name: "description",
+              widget: "text",
+            }
+          - { label: "Email Address", name: "email", widget: "string" }
+          - { label: "Phone", name: "phone", widget: "string", required: false }

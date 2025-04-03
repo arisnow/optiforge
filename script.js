@@ -1,243 +1,223 @@
-// Wait for the DOM to be fully loaded
+// script.js
 document.addEventListener("DOMContentLoaded", function () {
-  // Smooth scrolling for internal links
+  "use strict";
+
+  // 1. Mobile Menu Toggle
+  const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
+  const mainNav = document.querySelector(".main-nav");
+
+  if (mobileMenuToggle && mainNav) {
+    mobileMenuToggle.addEventListener("click", function () {
+      this.classList.toggle("active");
+      mainNav.classList.toggle("active");
+    });
+
+    // Close mobile menu when clicking on a link
+    const navLinks = mainNav.querySelectorAll("a");
+    navLinks.forEach((link) => {
+      link.addEventListener("click", function () {
+        mobileMenuToggle.classList.remove("active");
+        mainNav.classList.remove("active");
+      });
+    });
+  }
+
+  // 2. Smooth Scrolling
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       e.preventDefault();
-
       const targetId = this.getAttribute("href");
-
-      // Skip if the href is just "#"
-      if (targetId === "#") return;
-
-      const targetElement = document.querySelector(targetId);
-
-      if (targetElement) {
-        // Get header height to offset scroll position
-        const headerHeight = document.querySelector("header").offsetHeight;
-
-        // Calculate scroll position
-        const scrollPosition = targetElement.offsetTop - headerHeight;
-
-        // Smooth scroll to target
-        window.scrollTo({
-          top: scrollPosition,
-          behavior: "smooth",
-        });
+      if (targetId && targetId !== "#") {
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          const headerHeight =
+            document.querySelector(".site-header").offsetHeight;
+          const targetPosition =
+            targetElement.getBoundingClientRect().top +
+            window.scrollY -
+            headerHeight;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: "smooth",
+          });
+        }
       }
     });
   });
 
-  // Mobile navigation toggle (for smaller screens)
-  const createMobileNav = () => {
-    const header = document.querySelector("header");
-
-    // Only create mobile nav if it doesn't already exist
-    if (!document.querySelector(".mobile-nav-toggle")) {
-      const navMenu = document.querySelector("nav ul");
-      const mobileToggle = document.createElement("button");
-
-      mobileToggle.className = "mobile-nav-toggle";
-      mobileToggle.innerHTML = "<span></span><span></span><span></span>";
-      mobileToggle.setAttribute("aria-label", "Toggle Navigation");
-
-      header
-        .querySelector(".container")
-        .insertBefore(mobileToggle, navMenu.parentElement);
-
-      mobileToggle.addEventListener("click", () => {
-        mobileToggle.classList.toggle("active");
-        navMenu.classList.toggle("show");
-      });
-
-      // Close mobile menu when clicking a nav link
-      navMenu.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-          mobileToggle.classList.remove("active");
-          navMenu.classList.remove("show");
-        });
-      });
-
-      // Add mobile nav styles
-      const style = document.createElement("style");
-      style.textContent = `
-                @media (max-width: 768px) {
-                    header .container {
-                        flex-wrap: wrap;
-                    }
-                    
-                    nav {
-                        width: 100%;
-                        order: 3;
-                    }
-                    
-                    nav ul {
-                        display: none;
-                        flex-direction: column;
-                        width: 100%;
-                        padding: 1rem 0;
-                    }
-                    
-                    nav ul.show {
-                        display: flex;
-                    }
-                    
-                    nav ul li {
-                        margin: 0.5rem 0;
-                    }
-                    
-                    .mobile-nav-toggle {
-                        display: block;
-                        background: none;
-                        border: none;
-                        cursor: pointer;
-                        padding: 0.5rem;
-                    }
-                    
-                    .mobile-nav-toggle span {
-                        display: block;
-                        width: 25px;
-                        height: 3px;
-                        background-color: var(--dark-color);
-                        margin: 5px 0;
-                        transition: all 0.3s ease;
-                    }
-                    
-                    .mobile-nav-toggle.active span:nth-child(1) {
-                        transform: rotate(45deg) translate(5px, 5px);
-                    }
-                    
-                    .mobile-nav-toggle.active span:nth-child(2) {
-                        opacity: 0;
-                    }
-                    
-                    .mobile-nav-toggle.active span:nth-child(3) {
-                        transform: rotate(-45deg) translate(7px, -7px);
-                    }
-                }
-                
-                @media (min-width: 769px) {
-                    .mobile-nav-toggle {
-                        display: none;
-                    }
-                    
-                    nav ul {
-                        display: flex !important;
-                    }
-                }
-            `;
-      document.head.appendChild(style);
-    }
-  };
-
-  // Check viewport width and create mobile nav if needed
-  const handleResponsiveNav = () => {
-    if (window.innerWidth <= 768) {
-      createMobileNav();
-    }
-  };
-
-  // Initialize responsive nav
-  handleResponsiveNav();
-  window.addEventListener("resize", handleResponsiveNav);
-
-  // Form submission handling
+  // 3. Form Submission with Success Message
   const contactForm = document.querySelector('form[name="contact"]');
-
   if (contactForm) {
+    const successMessage = document.getElementById("formSuccessMessage");
+
     contactForm.addEventListener("submit", function (e) {
-      // Form is handled by Netlify, this is just for additional UX
-      const submitButton = this.querySelector('button[type="submit"]');
-      submitButton.innerHTML = "Sending...";
-      submitButton.disabled = true;
+      e.preventDefault();
 
-      // We're not preventing default, letting Netlify handle the form
+      // Helper function to encode form data
+      const encode = (data) => {
+        return Object.keys(data)
+          .map(
+            (key) =>
+              encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+          )
+          .join("&");
+      };
 
-      // Show success message after a short delay (will redirect if configured)
-      setTimeout(() => {
-        submitButton.innerHTML = "Submit";
-        submitButton.disabled = false;
-      }, 3000);
+      const formData = new FormData(contactForm);
+      const data = {};
+      formData.forEach((value, key) => {
+        data[key] = value;
+      });
+
+      // Submit form data using fetch
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode(data),
+      })
+        .then((response) => {
+          if (response.ok) {
+            // Show success message
+            successMessage.classList.remove("hidden");
+            // Reset form
+            contactForm.reset();
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+              successMessage.classList.add("hidden");
+            }, 5000);
+          } else {
+            console.error("Form submission failed:", response.status);
+          }
+        })
+        .catch((error) => console.error("Error submitting form:", error));
     });
   }
 
-  // Animation for approach steps
-  const steps = document.querySelectorAll(".approach-step");
+  // 4. Set current year in footer
+  document.getElementById("currentYear").textContent = new Date().getFullYear();
 
-  if (steps.length > 0) {
-    // Add animation CSS
-    const stepAnimation = document.createElement("style");
-    stepAnimation.textContent = `
-            .approach-step {
-                opacity: 0;
-                transform: translateX(-20px);
-                transition: opacity 0.6s ease, transform 0.6s ease;
-            }
-            
-            .approach-step.animated {
-                opacity: 1;
-                transform: translateX(0);
-            }
-            
-            .approach-step:nth-child(1) { transition-delay: 0.1s; }
-            .approach-step:nth-child(2) { transition-delay: 0.3s; }
-            .approach-step:nth-child(3) { transition-delay: 0.5s; }
-            .approach-step:nth-child(4) { transition-delay: 0.7s; }
-        `;
-    document.head.appendChild(stepAnimation);
-
-    // Animate steps on scroll
-    const animateSteps = () => {
-      const triggerPosition = window.innerHeight * 0.8;
-
-      const approachSection = document.querySelector(".approach");
-      const approachRect = approachSection.getBoundingClientRect();
-
-      if (approachRect.top < triggerPosition) {
-        steps.forEach((step) => {
-          step.classList.add("animated");
-        });
-        // Remove scroll listener once animated
-        window.removeEventListener("scroll", animateSteps);
+  // 5. CMS Content Loading
+  async function loadCmsData() {
+    try {
+      // Home Content
+      const homeResponse = await fetch("/_data/home.json");
+      if (homeResponse.ok) {
+        const homeData = await homeResponse.json();
+        document.getElementById("heroTitle").textContent =
+          homeData.hero_title || "";
+        document.getElementById("heroSubtitle").textContent =
+          homeData.hero_subtitle || "";
       }
-    };
 
-    // Initial check and add scroll event listener
-    animateSteps();
-    window.addEventListener("scroll", animateSteps);
+      // Services Content
+      const servicesResponse = await fetch("/_data/services.json");
+      if (servicesResponse.ok) {
+        const servicesData = await servicesResponse.json();
+        document.getElementById("servicesTitle").textContent =
+          servicesData.title || "";
+        document.getElementById("servicesDescription").textContent =
+          servicesData.description || "";
+
+        if (servicesData.items && servicesData.items.length > 0) {
+          const servicesContainer = document.getElementById("servicesItems");
+          servicesContainer.innerHTML = "";
+
+          servicesData.items.forEach((service) => {
+            const serviceHTML = `
+                          <div class="service-item">
+                              <div class="service-icon">
+                                  <i class="${service.icon}"></i>
+                              </div>
+                              <h3>${service.title}</h3>
+                              <p>${service.description}</p>
+                          </div>
+                      `;
+            servicesContainer.innerHTML += serviceHTML;
+          });
+        }
+      }
+
+      // Case Studies Content
+      const caseStudiesResponse = await fetch("/_data/case_studies.json");
+      if (caseStudiesResponse.ok) {
+        const caseStudiesData = await caseStudiesResponse.json();
+        document.getElementById("caseStudiesTitle").textContent =
+          caseStudiesData.title || "";
+        document.getElementById("caseStudiesDescription").textContent =
+          caseStudiesData.description || "";
+
+        if (caseStudiesData.items && caseStudiesData.items.length > 0) {
+          const caseStudiesContainer =
+            document.getElementById("caseStudiesItems");
+          caseStudiesContainer.innerHTML = "";
+
+          caseStudiesData.items.forEach((caseStudy) => {
+            const caseStudyHTML = `
+                          <div class="case-study-item">
+                              <div class="case-study-image">
+                                  <img src="${caseStudy.image}" alt="${caseStudy.title}">
+                              </div>
+                              <div class="case-study-content">
+                                  <h3>${caseStudy.title}</h3>
+                                  <p>${caseStudy.description}</p>
+                              </div>
+                          </div>
+                      `;
+            caseStudiesContainer.innerHTML += caseStudyHTML;
+          });
+        }
+      }
+
+      // Approach Content
+      const approachResponse = await fetch("/_data/approach.json");
+      if (approachResponse.ok) {
+        const approachData = await approachResponse.json();
+        document.getElementById("approachTitle").textContent =
+          approachData.title || "";
+        document.getElementById("approachDescription").textContent =
+          approachData.description || "";
+
+        if (approachData.steps && approachData.steps.length > 0) {
+          const stepsContainer = document.getElementById("approachSteps");
+          stepsContainer.innerHTML = "";
+
+          approachData.steps.forEach((step) => {
+            const stepHTML = `
+                          <div class="timeline-item">
+                              <div class="timeline-number">${step.number}</div>
+                              <div class="timeline-content">
+                                  <h3>${step.title}</h3>
+                                  <p>${step.description}</p>
+                              </div>
+                          </div>
+                      `;
+            stepsContainer.innerHTML += stepHTML;
+          });
+        }
+      }
+
+      // Contact Content
+      const contactResponse = await fetch("/_data/contact.json");
+      if (contactResponse.ok) {
+        const contactData = await contactResponse.json();
+        document.getElementById("contactTitle").textContent =
+          contactData.title || "";
+        document.getElementById("contactDescription").textContent =
+          contactData.description || "";
+
+        // Set footer email
+        if (contactData.email) {
+          const footerEmail = document.getElementById("footerEmail");
+          footerEmail.innerHTML = `<a href="mailto:${contactData.email}">${contactData.email}</a>`;
+        }
+      }
+    } catch (error) {
+      console.error("Error loading CMS data:", error);
+    }
   }
 
-  // Animation for solution and case study cards
-  const animateCards = () => {
-    const cards = document.querySelectorAll(".solution-card, .case-card");
-    const triggerPosition = window.innerHeight * 0.8;
-
-    cards.forEach((card) => {
-      const cardRect = card.getBoundingClientRect();
-
-      if (cardRect.top < triggerPosition) {
-        card.classList.add("revealed");
-      }
-    });
-  };
-
-  // Add CSS for reveal animation
-  const revealStyle = document.createElement("style");
-  revealStyle.textContent = `
-        .solution-card, .case-card {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        
-        .solution-card.revealed, .case-card.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    `;
-  document.head.appendChild(revealStyle);
-
-  // Initial check and add scroll event listener
-  animateCards();
-  window.addEventListener("scroll", animateCards);
+  // Load CMS data
+  loadCmsData().catch((err) => {
+    console.log("CMS data not available yet, using default placeholders");
+  });
 });

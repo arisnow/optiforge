@@ -1,0 +1,21 @@
+{
+  "title": "Success Stories",
+  "description": "Discover how we've helped organizations across various industries achieve their technology goals and drive business growth.",
+  "items": [
+    {
+      "title": "Manufacturing Sector",
+      "description": "\"OptiForge helped us implement a digital transformation strategy that increased production efficiency by 35% and reduced operational costs.\" — Operations Director, Manufacturing Company",
+      "image": "https://images.unsplash.com/photo-1633121036988-33068333b4ba?q=80&w=2070"
+    },
+    {
+      "title": "Financial Services",
+      "description": "\"The custom data analytics platform developed by OptiForge transformed our decision-making process and helped us identify new market opportunities.\" — CTO, Financial Services Firm",
+      "image": "https://images.unsplash.com/photo-1579621970795-87facc2f976d?q=80&w=2070"
+    },
+    {
+      "title": "Healthcare Provider",
+      "description": "\"OptiForge's technology strategy modernized our patient management systems, improving patient satisfaction and reducing administrative overhead.\" — IT Director, Healthcare Network",
+      "image": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070"
+    }
+  ]
+}

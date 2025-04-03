@@ -1,0 +1,26 @@
+{
+  "title": "Our Approach",
+  "description": "We follow a proven methodology to ensure successful technology implementation and business transformation.",
+  "steps": [
+    {
+      "number": 1,
+      "title": "Discovery & Assessment",
+      "description": "We begin by understanding your business goals, challenges, and current technology landscape through in-depth consultation and analysis."
+    },
+    {
+      "number": 2,
+      "title": "Strategy Development",
+      "description": "Using insights from the discovery phase, we create a tailored technology strategy and roadmap aligned with your business objectives."
+    },
+    {
+      "number": 3,
+      "title": "Implementation",
+      "description": "Our team executes the strategy with precision, ensuring minimal disruption to your business operations and maximum adoption."
+    },
+    {
+      "number": 4,
+      "title": "Continuous Improvement",
+      "description": "We monitor outcomes, gather feedback, and refine the implementation to ensure your technology solutions continue to deliver value."
+    }
+  ]
+}

@@ -3,314 +3,169 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OptiForge - Automation Solutions for Mid-Market Businesses</title>
+    <title>OptiForge - Technology Consultancy</title>
+    <meta
+      name="description"
+      content="OptiForge is a technology consultancy dedicated to helping businesses achieve their goals through innovative solutions."
+    />
     <link rel="stylesheet" href="styles.css" />
-    <script src="script.js" defer></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
   </head>
   <body>
-    <header>
+    <header class="site-header">
       <div class="container">
         <div class="logo">
           <h1>OptiForge</h1>
         </div>
-        <nav>
+        <nav class="main-nav">
           <ul>
-            <li><a href="#solutions">Solutions</a></li>
+            <li><a href="#services">Services</a></li>
             <li><a href="#approach">Our Approach</a></li>
-            <li><a href="#success">Success Stories</a></li>
-            <li><a href="#contact" class="btn-primary">Contact Us</a></li>
+            <li><a href="#case-studies">Case Studies</a></li>
+            <li><a href="#contact" class="btn">Contact Us</a></li>
           </ul>
         </nav>
+        <div class="mobile-menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
     </header>
 
     <section class="hero">
       <div class="container">
         <div class="hero-content">
-          <h1>Streamline Your Business with Intelligent Automation</h1>
-          <p>
-            Helping mid-market companies automate workflows, reduce costs, and
-            accelerate growth
-          </p>
-          <a href="#contact" class="btn-primary">Get Started</a>
+          <h1 id="heroTitle"></h1>
+          <p id="heroSubtitle"></p>
+          <a href="#contact" class="btn btn-primary">Get Started</a>
+          <a href="#services" class="btn btn-secondary">Learn More</a>
         </div>
       </div>
     </section>
 
-    <section id="solutions" class="solutions">
+    <section id="services" class="services">
       <div class="container">
-        <h2>Automation Solutions</h2>
-        <div class="solutions-grid">
-          <div class="solution-card">
-            <div class="icon">
-              <img src="images/workflow-icon.svg" alt="Workflow Automation" />
-            </div>
-            <h3>Workflow Automation</h3>
-            <p>
-              Streamline repetitive tasks and processes to free up valuable
-              employee time.
-            </p>
-            <div class="solution-use-cases">
-              <h4>Finance</h4>
-              <ul>
-                <li>Invoice processing</li>
-                <li>Expense management</li>
-              </ul>
-            </div>
-          </div>
-          <div class="solution-card">
-            <div class="icon">
-              <img src="images/document-icon.svg" alt="Document Processing" />
-            </div>
-            <h3>Document Processing</h3>
-            <p>
-              Extract, classify, and process data from invoices, contracts, and
-              other documents.
-            </p>
-            <div class="solution-use-cases">
-              <h4>HR</h4>
-              <ul>
-                <li>Employee onboarding</li>
-                <li>Benefits administration</li>
-              </ul>
-            </div>
-          </div>
-          <div class="solution-card">
-            <div class="icon">
-              <img src="images/analytics-icon.svg" alt="Business Analytics" />
-            </div>
-            <h3>Business Analytics</h3>
-            <p>
-              Turn your data into actionable insights with automated reporting.
-            </p>
-            <div class="solution-use-cases">
-              <h4>Operations</h4>
-              <ul>
-                <li>Supply chain management</li>
-                <li>Inventory optimization</li>
-              </ul>
-            </div>
-          </div>
-          <div class="solution-card">
-            <div class="icon">
-              <img src="images/integration-icon.svg" alt="System Integration" />
-            </div>
-            <h3>System Integration</h3>
-            <p>
-              Seamlessly connect your business systems for end-to-end
-              automation.
-            </p>
-            <div class="solution-use-cases">
-              <h4>Sales & Marketing</h4>
-              <ul>
-                <li>Lead qualification</li>
-                <li>Campaign management</li>
-              </ul>
-            </div>
-          </div>
+        <div class="section-header">
+          <h2 id="servicesTitle"></h2>
+          <p id="servicesDescription"></p>
+        </div>
+        <div class="services-grid" id="servicesItems">
+          <!-- Services will be loaded dynamically from CMS -->
         </div>
       </div>
     </section>
 
     <section id="approach" class="approach">
       <div class="container">
-        <h2>Our Approach</h2>
-        <div class="approach-diagram">
-          <div class="approach-steps">
-            <div class="approach-step">
-              <div class="step-number">1</div>
-              <div class="step-content">
-                <h3>Discover</h3>
-                <p>
-                  We analyze your current processes to identify opportunities
-                  for automation and efficiency gains.
-                </p>
-              </div>
-            </div>
-            <div class="approach-step">
-              <div class="step-number">2</div>
-              <div class="step-content">
-                <h3>Design</h3>
-                <p>
-                  We create a tailored automation solution that addresses your
-                  specific business needs.
-                </p>
-              </div>
-            </div>
-            <div class="approach-step">
-              <div class="step-number">3</div>
-              <div class="step-content">
-                <h3>Deliver</h3>
-                <p>
-                  We implement the solution quickly with minimal disruption to
-                  your operations.
-                </p>
-              </div>
-            </div>
-            <div class="approach-step">
-              <div class="step-number">4</div>
-              <div class="step-content">
-                <h3>Drive Results</h3>
-                <p>
-                  We ensure you achieve measurable outcomes and continue to
-                  optimize for maximum value.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="approach-image">
-            <img
-              src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-              alt="Streamlined process"
-            />
-          </div>
+        <div class="section-header">
+          <h2 id="approachTitle"></h2>
+          <p id="approachDescription"></p>
         </div>
-        <div class="approach-benefits">
-          <div class="benefit">
-            <h4>Speed</h4>
-            <p>Implementation in weeks, not months</p>
-          </div>
-          <div class="benefit">
-            <h4>Simplicity</h4>
-            <p>No over-engineered solutions</p>
-          </div>
-          <div class="benefit">
-            <h4>Results</h4>
-            <p>Measurable ROI from day one</p>
-          </div>
+        <div class="timeline" id="approachSteps">
+          <!-- Approach steps will be loaded dynamically from CMS -->
         </div>
       </div>
     </section>
 
-    <section id="success" class="case-studies">
+    <section id="case-studies" class="case-studies">
       <div class="container">
-        <h2>Success Stories</h2>
-        <div class="case-grid">
-          <div class="case-card">
-            <div class="case-image">
-              <img
-                src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-                alt="Manufacturing success"
-              />
-            </div>
-            <div class="case-content">
-              <span class="industry">Manufacturing</span>
-              <h3>50% Reduction in Processing Time</h3>
-              <p>
-                A mid-sized manufacturer automated their order-to-fulfillment
-                process, cutting processing time in half and improving accuracy
-                by 35%.
-              </p>
-            </div>
-          </div>
-          <div class="case-card">
-            <div class="case-image">
-              <img
-                src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-                alt="Healthcare success"
-              />
-            </div>
-            <div class="case-content">
-              <span class="industry">Healthcare</span>
-              <h3>75% Less Manual Data Entry</h3>
-              <p>
-                A regional healthcare provider implemented document processing
-                automation, reducing manual data entry by 75% and improving
-                patient intake efficiency.
-              </p>
-            </div>
-          </div>
-          <div class="case-card">
-            <div class="case-image">
-              <img
-                src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-                alt="Financial services success"
-              />
-            </div>
-            <div class="case-content">
-              <span class="industry">Financial Services</span>
-              <h3>$1.2M Annual Cost Savings</h3>
-              <p>
-                A financial services firm automated compliance reporting, saving
-                over $1.2M annually and reducing audit preparation time by 60%.
-              </p>
-            </div>
-          </div>
+        <div class="section-header">
+          <h2 id="caseStudiesTitle"></h2>
+          <p id="caseStudiesDescription"></p>
+        </div>
+        <div class="case-studies-grid" id="caseStudiesItems">
+          <!-- Case studies will be loaded dynamically from CMS -->
         </div>
       </div>
     </section>
 
     <section id="contact" class="contact">
       <div class="container">
-        <h2>Ready to Get Started?</h2>
-        <div class="contact-container">
-          <div class="contact-info">
-            <p>
-              Contact us today to learn how OptiForge can help your business
-              leverage automation to achieve its goals.
-            </p>
-            <div class="contact-image">
-              <img
-                src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-                alt="Business automation"
-              />
+        <div class="section-header">
+          <h2 id="contactTitle"></h2>
+          <p id="contactDescription"></p>
+        </div>
+        <div class="contact-form-container">
+          <!-- Success message (hidden by default) -->
+          <div id="formSuccessMessage" class="success-message hidden">
+            <p>Thank you for your message! We will be in touch shortly.</p>
+          </div>
+
+          <form
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            class="contact-form"
+          >
+            <input type="hidden" name="form-name" value="contact" />
+            <div class="form-group">
+              <label for="name">Your Name*</label>
+              <input type="text" id="name" name="name" required />
             </div>
-          </div>
-          <div class="contact-form">
-            <form name="contact" method="POST" data-netlify="true">
-              <input type="hidden" name="form-name" value="contact" />
-              <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" required />
-              </div>
-              <div class="form-group">
-                <label for="company">Company</label>
-                <input type="text" id="company" name="company" required />
-              </div>
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required />
-              </div>
-              <div class="form-group">
-                <label for="phone">Phone</label>
-                <input type="tel" id="phone" name="phone" />
-              </div>
-              <div class="form-group">
-                <label for="message">How can we help?</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="4"
-                  required
-                ></textarea>
-              </div>
-              <button type="submit" class="btn-primary">Submit</button>
-            </form>
-          </div>
+            <div class="form-group">
+              <label for="email">Email Address*</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="company">Company Name</label>
+              <input type="text" id="company" name="company" />
+            </div>
+            <div class="form-group">
+              <label for="message">Message*</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+          </form>
         </div>
       </div>
     </section>
 
-    <footer>
+    <footer class="site-footer">
       <div class="container">
         <div class="footer-content">
           <div class="footer-logo">
             <h2>OptiForge</h2>
-            <p>Automation solutions for mid-market businesses</p>
+            <p id="footerDescription">
+              Technology consultancy dedicated to helping businesses achieve
+              their goals through innovative solutions.
+            </p>
           </div>
-          <div class="footer-links">
-            <ul>
-              <li><a href="#solutions">Solutions</a></li>
-              <li><a href="#approach">Our Approach</a></li>
-              <li><a href="#success">Success Stories</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
+          <div class="footer-contact">
+            <h3>Contact Us</h3>
+            <p id="footerEmail"></p>
           </div>
         </div>
-        <div class="copyright">
-          <p>&copy; 2025 OptiForge. All rights reserved.</p>
+        <div class="footer-bottom">
+          <p>
+            &copy; <span id="currentYear">2025</span> OptiForge. All rights
+            reserved.
+          </p>
         </div>
       </div>
     </footer>
+
+    <!-- Netlify Identity Widget -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script src="script.js"></script>
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", (user) => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
   </body>
 </html>

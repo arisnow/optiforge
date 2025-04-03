@@ -1,0 +1,21 @@
+{
+  "title": "Our Services",
+  "description": "We provide comprehensive technology consultancy services to help businesses leverage the latest tools and strategies for success.",
+  "items": [
+    {
+      "icon": "fas fa-chart-line",
+      "title": "Technology Strategy",
+      "description": "Develop a clear roadmap aligning technology investments with your business objectives for maximum ROI and competitive advantage."
+    },
+    {
+      "icon": "fas fa-cogs",
+      "title": "Process Optimization",
+      "description": "Streamline workflows and operations through smart technology implementation to improve productivity and reduce costs."
+    },
+    {
+      "icon": "fas fa-laptop-code",
+      "title": "Custom Software Solutions",
+      "description": "Design and develop tailored software solutions that address your unique business challenges and opportunities."
+    }
+  ]
+}
